@@ -11,7 +11,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/equipos', equiposRoutes);
-app.use('/repuestos', equiposRoutes)
+app.use('/repuestos', repuestosRoutes)
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
