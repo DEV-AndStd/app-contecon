@@ -5,6 +5,10 @@ const equiposRoutes = require('./routes/equipos');
 
 app.use(express.json());
 
+app.get('/', (req, res) => {
+  res.send('¡Hola, mundo!');
+});
+
 app.use('/equipos', equiposRoutes);
 
 app.listen(3000, () => {
