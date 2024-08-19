@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const db = require('./db');
 const equiposRoutes = require('./routes/equipos');
-const repuestosRoutes = require('./routes/repuestos')
+const repuestosRoutes = require('./routes/repuestos');
 
 app.use(express.json());
 

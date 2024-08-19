@@ -12,11 +12,11 @@
       "dest": "app.js"
     },
     {
-      "src": "/",
+      "src": "/repuestos",
       "dest": "app.js"
     },
     {
-      "src": "/repuestos",
+      "src": "/",
       "dest": "app.js"
     }
   ]

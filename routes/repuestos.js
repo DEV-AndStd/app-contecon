@@ -1,6 +1,6 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
-const pool = require('../db')
+const pool = require('../db');
 
 router.get('/', async (req, res) => {
     try {
@@ -22,3 +22,4 @@ try {
     res.status(500).json({ message: 'Error al crear repuesto' });
 }
 });
+module.exports = router;
