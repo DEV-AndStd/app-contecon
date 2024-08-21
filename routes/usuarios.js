@@ -10,7 +10,7 @@ router.get('/', async (req, res) => {
       const values = [codigo, password];
       const result = await pool.query(query, values);*/
 
-      const result = await pool.query('SELECT nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2 ',[codigo,password]);
+      const result = await pool.query(`SELECT nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2 `,[codigo,password]);
 
       if (result.rows.length > 0) {
           res.json({ message: 'Autenticación exitosa', usuario: result.rows[0] });
