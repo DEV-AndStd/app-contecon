@@ -20,6 +20,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/estado_equipos",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }
