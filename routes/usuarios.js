@@ -6,9 +6,11 @@ router.get('/', async (req, res) => {
   try {
       const { codigo, password } = req.query; // Usar req.query para una petición GET
 
-      const query = `SELECT id, nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2`;
+      /*const query = `SELECT id, nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2`;
       const values = [codigo, password];
-      const result = await pool.query(query, values);
+      const result = await pool.query(query, values);*/
+
+      const result = await pool.query('SELECT nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2 ',[codigo,password]);
 
       if (result.rows.length > 0) {
           res.json({ message: 'Autenticación exitosa', usuario: result.rows[0] });
