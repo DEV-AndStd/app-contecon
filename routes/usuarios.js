@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db')
 
-// Endpoint GET para autenticar usuario
 router.get('/', async (req, res) => {
   try {
       const { codigo, password } = req.query; // Usar req.query para una petición GET
@@ -24,10 +23,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const { nombre, password, rol, email, codigo } = req.body;
+      const { nombre, password, email, codigo } = req.body;
       const result = await pool.query(
-        `INSERT INTO usuarios (nombre, password, rol, email, codigo) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
-        [nombre, password, rol, email, codigo]
+        `INSERT INTO usuarios (nombre, password, email, codigo) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [nombre, password, email, codigo]
       );
       res.json({ message: 'Usuario creado exitosamente', usuario: result.rows[0] });
     } catch (err) {
