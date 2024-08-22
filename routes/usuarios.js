@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
   try {
       const { codigo, password } = req.query; // Usar req.query para una petición GET
 
-      const query = `SELECT id, nombre, codigo FROM usuarios WHERE codigo = $1 AND password = $2`;
+      const query = `SELECT id, nombre, codigo, rol FROM usuarios WHERE codigo = $1 AND password = $2`;
       const values = [codigo, password];
       const result = await pool.query(query, values);
 
@@ -24,10 +24,10 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     try {
-      const { nombre, password, email, codigo } = req.body;
+      const { nombre, password, codigo, rol } = req.body;
       const result = await pool.query(
-        `INSERT INTO usuarios (nombre, password, email, codigo) VALUES ($1, $2, $3, $4) RETURNING *`,
-        [nombre, password, email, codigo]
+        `INSERT INTO usuarios (nombre, password, codigo, rol) VALUES ($1, $2, $3, $4) RETURNING *`,
+        [nombre, password, codigo, rol]
       );
       res.json({ message: 'Usuario creado exitosamente', usuario: result.rows[0] });
     } catch (err) {
