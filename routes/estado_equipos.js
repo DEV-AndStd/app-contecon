@@ -36,6 +36,20 @@ router.put('/', async (req,res) => {
     console.error(err);
     res.status(500).json({ message: 'Error al actualizar estado' })
   }
-})
+});
+
+router.delete('/', async (req,res) => {
+  try {
+    const { id_estado, id_equipo } = req.body;
+    const result = await pool.query(
+      `DELETE FROM estado_equipos WHERE id_estado = $1 AND id_equipo = $2 `, [ id_estado, id_equipo ]
+    );
+    res.json({ message: 'Estado eliminado exitosamente', usuario: result.rows[0]});
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error al eliminar estado' })
+  }
+});
 
 module.exports = router;

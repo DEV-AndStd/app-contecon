@@ -43,8 +43,7 @@ create table turnos (
 id bigint primary key generated always as identity,
 dia date not null,
 hora time not null,
-validacion integer not null,
-estado text not null
+validacion integer not null
 );
 
 
