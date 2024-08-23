@@ -23,18 +23,27 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.delete('/', async (req,res) => {
+router.delete('/', async (req, res) => {
   try {
     const { id } = req.body;
-    const result = await pool.query(
-      `DELETE FROM equipos WHERE id = $1 `, [ id ]
-    );
-    res.json({ message: 'Equipo eliminado exitosamente', usuario: result.rows[0]});
+
+    if (!id) {
+      return res.status(400).json({ message: 'ID es requerido' });
+    }
+
+    const result = await pool.query('DELETE FROM equipos WHERE id = $1 RETURNING *', [id]);
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Equipo no encontrado' });
+    }
+
+    res.json({ message: 'Equipo eliminado exitosamente' });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error al eliminar equipo' })
+    res.status(500).json({ message: 'Error al eliminar equipo' });
   }
 });
+
 
 module.exports = router;

@@ -38,18 +38,30 @@ router.put('/', async (req,res) => {
   }
 });
 
-router.delete('/', async (req,res) => {
+router.delete('/', async (req, res) => {
   try {
     const { id, id_equipo } = req.body;
+
+    if (!id || !id_equipo) {
+      return res.status(400).json({ message: 'Faltan parámetros necesarios' });
+    }
+
     const result = await pool.query(
-      `DELETE FROM estado_equipos WHERE id = $1 AND id_equipo = $2 `, [ id, id_equipo ]
+      'DELETE FROM estado_equipos WHERE id = $1 AND id_equipo = $2',
+      [id, id_equipo]
     );
-    res.json({ message: 'Estado eliminado exitosamente', usuario: result.rows[0]});
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ message: 'Estado no encontrado' });
+    }
+
+    res.json({ message: 'Estado eliminado exitosamente' });
 
   } catch (err) {
     console.error(err);
-    res.status(500).json({ message: 'Error al eliminar estado' })
+    res.status(500).json({ message: 'Error al eliminar estado' });
   }
 });
+
 
 module.exports = router;
