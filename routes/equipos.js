@@ -25,9 +25,9 @@ router.post('/', async (req, res) => {
 
 router.delete('/', async (req,res) => {
   try {
-    const { id_equipo } = req.body;
+    const { id } = req.body;
     const result = await pool.query(
-      `DELETE FROM equipos WHERE id_equipo = $1 `, [ id_equipo ]
+      `DELETE FROM equipos WHERE id = $1 `, [ id_equipo ]
     );
     res.json({ message: 'Equipo eliminado exitosamente', usuario: result.rows[0]});
 

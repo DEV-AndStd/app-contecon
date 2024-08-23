@@ -40,9 +40,9 @@ router.put('/', async (req,res) => {
 
 router.delete('/', async (req,res) => {
   try {
-    const { id_estado, id_equipo } = req.body;
+    const { id, id_equipo } = req.body;
     const result = await pool.query(
-      `DELETE FROM estado_equipos WHERE id_estado = $1 AND id_equipo = $2 `, [ id_estado, id_equipo ]
+      `DELETE FROM estado_equipos WHERE id = $1 AND id_equipo = $2 `, [ id, id_equipo ]
     );
     res.json({ message: 'Estado eliminado exitosamente', usuario: result.rows[0]});
 
