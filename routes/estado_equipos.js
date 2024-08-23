@@ -24,4 +24,18 @@ router.post('/', async (req, res) => {
   }
 });
 
+router.put('/', async (req,res) => {
+  try {
+    const { estado, id_equipo } = req.body;
+    const result = await pool.query(
+      `UPDATE estado_equipos SET estado = $1 WHERE id_equipo = $2 `, [ estado, id_equipo ]
+    );
+    res.json({ message: 'Estado actualizado exitosamente', usuario: result.rows[0]});
+
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ message: 'Error al actualizar estado' })
+  }
+})
+
 module.exports = router;
