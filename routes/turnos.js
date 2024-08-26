@@ -25,7 +25,7 @@ try {
     const { dia, hora, validacion } = req.body;
 
     //verificacion para la creacion del turno
-    const checkresult = await pool.query('SELECT * FROM turnos WHERE dia = $1 AND hora = $2', [dia,hora]);
+    const checkResult = await pool.query('SELECT * FROM turnos WHERE dia = $1 AND hora = $2', [dia,hora]);
 
     if (checkResult.rows.length > 0) {
       return res.status(400).json({ message: 'Ya existe un turno para esta fecha y hora.' });
