@@ -48,6 +48,6 @@ router.post('/', async (req, res) => {
       console.error(err);
       res.status(500).json({ message: 'Error al actualizar contraseña' })
     }
-  })
+  });
 
 module.exports = router;
