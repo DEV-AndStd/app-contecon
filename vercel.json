@@ -28,6 +28,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/registro_turnos",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }

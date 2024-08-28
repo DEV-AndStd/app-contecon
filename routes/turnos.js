@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../db');
-const e = require('express');
 
 router.get('/', async (req, res) => {
     try {
@@ -51,6 +50,27 @@ router.put('/', async (req,res) => {
       console.error(err);
       res.status(500).json({ message: 'Error al actualizar turno' })
     }
+});
+
+// endpoint para reiniciar la secuencia de auto incremento
+router.post('/reset-auto-increment', async (req, res) => {
+  try {
+      await pool.query('ALTER SEQUENCE turnos_id_seq RESTART WITH 1');
+      res.json({ message: 'Contador reiniciado exitosamente' });
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error al reiniciar el contador' });
+  }
+});
+
+router.delete('/',async(req,res) => {
+  try {
+      await pool.query('DELETE from turnos');
+      res.json({ message: 'Datos eliminados'});
+  } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Error al eliminar datos'})
+  }
 });
 
 module.exports = router;

@@ -61,8 +61,12 @@ foreign key (id_turno) references turnos (id)
 
 
 create table historial_turnos (
-id bigint primary key generated always as identity,
-dia date not null,
-hora time not null,
-descripcion text
+    id bigint primary key generated always as identity,
+    id_turno bigint not null,
+    dia date not null,
+    hora time not null,
+    nombre text not null,
+    motivo text not null,
+    n_cierre text,
+    fecha_registro timestamp not null
 );
