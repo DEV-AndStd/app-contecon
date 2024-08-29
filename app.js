@@ -5,7 +5,7 @@ const repuestosRoutes = require('./routes/repuestos');
 const usuariosRoutes = require('./routes/usuarios');
 const estado_equiposRoutes = require('./routes/estado_equipos');
 const turnosRoutes = require('./routes/turnos');
-const registrosRoutes = require('./routes/registro_turnos');
+const registrosRoutes = require('./routes/registro_turnos.js');
 
 app.use(express.json());
 
