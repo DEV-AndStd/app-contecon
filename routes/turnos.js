@@ -65,7 +65,8 @@ router.post('/reset-auto-increment', async (req, res) => {
 
 router.delete('/',async(req,res) => {
   try {
-      await pool.query('DELETE from turnos');
+    const { dia } = req.query;
+      await pool.query('DELETE from turnos WHERE dia != $1', [dia]);
       res.json({ message: 'Datos eliminados'});
   } catch (err) {
       console.error(err);

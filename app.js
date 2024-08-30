@@ -18,7 +18,6 @@ app.use('/repuestos', repuestosRoutes);
 app.use('/usuarios', usuariosRoutes);
 app.use('/estado_equipos', estado_equiposRoutes);
 app.use('/turnos', turnosRoutes);
-
 app.use('/registro_turnos',registrosRoutes);
 
 app.listen(3000, () => {
