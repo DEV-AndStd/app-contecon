@@ -54,9 +54,10 @@ nombre text not null,
 motivo text not null,
 detalle text not null,
 id_turno bigint not null,
+dia date not null,
+hora time not null,
 n_cierre text,
-fecha_registro timestamp,
-foreign key (id_turno) references turnos (id)
+fecha_registro timestamp
 );
 
 

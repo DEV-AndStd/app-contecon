@@ -12,11 +12,10 @@ router.get('/', async (req, res) => {
     }
   });
 
-
   router.post('/', async (req, res) => {
     try {
-      const {codigo, nombre, motivo, detalle, id_turno} = req.body;
-      const result = await pool.query('INSERT INTO registro_turnos (codigo, nombre, motivo, detalle, id_turno) VALUES ($1, $2, $3, $4, $5) RETURNING *', [codigo, nombre, motivo, detalle, id_turno]);
+      const {codigo, nombre, motivo, detalle, id_turno, dia, hora} = req.body;
+      const result = await pool.query('INSERT INTO registro_turnos (codigo, nombre, motivo, detalle, id_turno, dia, hora) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *', [codigo, nombre, motivo, detalle, id_turno, dia, hora]);
       res.json(result.rows[0]);
     } catch (err) {
       console.error(err);
