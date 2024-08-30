@@ -65,13 +65,13 @@ router.post('/reset-auto-increment', async (req, res) => {
 
 router.delete('/',async(req,res) => {
   try {
-    const { dia } = req.query;
+    const { dia } = req.body;
     console.log(`Eliminando registros donde dia != ${dia}`);
 
-      await pool.query('DELETE from turnos WHERE dia != $1', [dia]);
+      await pool.query('DELETE FROM turnos WHERE dia != $1', [dia]);
 
     console.log(`Registros eliminados: ${result.rowCount}`);
-    
+
       res.json({ message: 'Datos eliminados'});
   } catch (err) {
       console.error(err);
