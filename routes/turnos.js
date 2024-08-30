@@ -68,7 +68,7 @@ router.delete('/',async(req,res) => {
     const { dia } = req.body;
     console.log(`Eliminando registros donde dia != ${dia}`);
 
-      await pool.query('DELETE FROM turnos WHERE dia != $1', [dia]);
+      const result = await pool.query('DELETE FROM turnos WHERE dia != $1', [dia]);
 
     console.log(`Registros eliminados: ${result.rowCount}`);
 
