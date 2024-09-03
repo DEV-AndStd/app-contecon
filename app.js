@@ -6,6 +6,7 @@ const usuariosRoutes = require('./routes/usuarios');
 const estado_equiposRoutes = require('./routes/estado_equipos');
 const turnosRoutes = require('./routes/turnos');
 const registrosRoutes = require('./routes/registro_turnos.js');
+const emergenciaRoutes = require('./routes/turnos_emergencia');
 
 app.use(express.json());
 
@@ -19,6 +20,7 @@ app.use('/usuarios', usuariosRoutes);
 app.use('/estado_equipos', estado_equiposRoutes);
 app.use('/turnos', turnosRoutes);
 app.use('/registro_turnos',registrosRoutes);
+app.use('/turnos_emergencia', emergenciaRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');

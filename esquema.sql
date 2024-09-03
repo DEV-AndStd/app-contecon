@@ -46,6 +46,13 @@ hora time not null,
 validacion integer not null
 );
 
+create table turnos_emergencia (
+    id bigint primary key generated always as identity,
+    nombre text not null,
+    codigo bigint not null,
+    dia date not null,
+    hora time not null
+);
 
 create table registro_turnos (
 id bigint primary key generated always as identity,

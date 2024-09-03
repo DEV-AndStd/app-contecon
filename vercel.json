@@ -36,6 +36,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/turnos_emergencia",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }
