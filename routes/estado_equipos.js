@@ -15,8 +15,8 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
   try {
-    const { id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones} = req.body;
-    const result = await pool.query('INSERT INTO estado_equipos(id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *', [id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones]);
+    const { id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones, codigo} = req.body;
+    const result = await pool.query('INSERT INTO estado_equipos(id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones, codigo) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *', [id_equipo,nombre,fecha_inicio,estado,falla,repuesto,seccion, fecha_fin_estado, observaciones, codigo]);
     res.json(result.rows[0]);
   } catch (err) {
     console.error(err);
