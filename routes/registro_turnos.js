@@ -25,9 +25,9 @@ router.get('/', async (req, res) => {
 
 router.put('/', async (req,res) => {
     try {
-      const { n_cierre, fecha_registro, id } = req.body;
+      const { n_cierre, fecha_registro, observaciones, id } = req.body;
       const result = await pool.query(
-        `UPDATE registro_turnos SET n_cierre = $1, fecha_registro = $2 WHERE id = $3 `, [  n_cierre, fecha_registro, id ]
+        `UPDATE registro_turnos SET n_cierre = $1, fecha_registro = $2 , observaciones = $3 WHERE id = $4 `, [  n_cierre, fecha_registro, observaciones, id ]
       );
       res.json({ message: 'Registro actualizado exitosamente'});
   

@@ -64,7 +64,8 @@ id_turno bigint not null,
 dia date not null,
 hora time not null,
 n_cierre text,
-fecha_registro timestamp
+fecha_registro timestamp,
+observaciones text
 );
 
 
