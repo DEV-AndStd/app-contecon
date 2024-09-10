@@ -22,3 +22,5 @@ router.post('/', async (req, res) => {
     res.status(500).json({ message: 'Error al crear registro' });
   }
 });
+
+module.exports = router;
