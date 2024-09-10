@@ -65,7 +65,8 @@ dia date not null,
 hora time not null,
 n_cierre text,
 fecha_registro timestamp,
-observaciones text
+observaciones text,
+tiempo_cierrer text
 );
 
 
