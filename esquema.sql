@@ -29,6 +29,16 @@ observaciones text,
 foreign key (id_equipo) references equipos (id)
 );
 
+
+CREATE TABLE EstadoHistorial (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    itemId INTEGER NOT NULL,
+    estado TEXT NOT NULL,
+    fechaCambio TEXT NOT NULL,
+    FOREIGN KEY (itemId) REFERENCES estado_equipos(id)
+);
+
+
 // ok // 
 create table usuarios (
 id bigint primary key generated always as identity,
@@ -68,7 +78,6 @@ fecha_registro timestamp,
 observaciones text,
 tiempo_cierrer text
 );
-
 
 create table historial_turnos (
     id bigint primary key generated always as identity,
