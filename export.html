@@ -6,8 +6,12 @@
     <title>Exportar Datos</title>
 </head>
 <body>
-    <h1>Exportar Datos de Usuarios de la BD</h1>
+    <h1>Opciones de exportacion de Datos</h1>
+    <h3>Exportar datos de Usuarios</h3>
     <button id="export-button">Descargar Datos</button>
+
+    <h3>Exportar datos de Registro de Equipos</h3>
+    <button id="equipos-button">Descargar datos</button>
 
     <script>
         document.getElementById('export-button').addEventListener('click', () => {
@@ -23,7 +27,30 @@
                     const a = document.createElement('a');
                     a.style.display = 'none';
                     a.href = url;
-                    a.download = 'datos.csv';
+                    a.download = 'registro-usuarios.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error en el html:', error);
+                });
+        });
+
+        document.getElementById('equipos-button').addEventListener('click', () => {
+            fetch('/exportar/equipos') 
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    }
+                    throw new Error('Error en la descarga');
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'registro-equipos.csv';
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);
