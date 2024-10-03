@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
 // Ruta para servir el HTML
 app.get('/exportar', (req, res) => {
-  res.sendFile(path.join(__dirname, 'exportar.html'));
+  res.sendFile(path.join(__dirname, 'export.html'));
 });
 
 app.use('/equipos', equiposRoutes);
