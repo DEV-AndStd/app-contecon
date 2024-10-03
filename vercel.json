@@ -44,6 +44,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/exportar",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }

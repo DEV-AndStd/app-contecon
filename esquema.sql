@@ -39,7 +39,6 @@ CREATE TABLE EstadoHistorial (
 );
 
 
-// ok // 
 create table usuarios (
 id bigint primary key generated always as identity,
 nombre text not null,
