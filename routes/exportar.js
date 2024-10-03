@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-router.get('/exportar', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const result = await pool.query('SELECT * from usuarios'); 
         const data = result.rows;
@@ -30,7 +30,7 @@ router.get('/exportar', async (req, res) => {
         res.send(csv);
     } catch (error) {
         console.error(error);
-        res.status(500).send('Error al exportar datos');
+        res.status(500).send('Error al datos');
     }
 });
 
