@@ -11,7 +11,7 @@
 
     <script>
         document.getElementById('export-button').addEventListener('click', () => {
-            fetch('/Exportar') 
+            fetch('./routes/exportar') 
                 .then(response => {
                     if (response.ok) {
                         return response.blob();

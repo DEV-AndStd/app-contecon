@@ -12,12 +12,13 @@ const exportarRoutes = require('./routes/exportar');
 
 app.use(express.json());
 
-/*app.get('/', (req, res) => {
-  res.send('¡Hola, mundo!');
-});*/
-
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'export.html')); // Ajusta la ruta según donde esté tu HTML
+  res.send('¡Hola, mundo!');
+});
+
+// Ruta para servir el HTML
+app.get('/exportar', (req, res) => {
+  res.sendFile(path.join(__dirname, 'exportar.html'));
 });
 
 app.use('/equipos', equiposRoutes);
