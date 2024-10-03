@@ -30,7 +30,7 @@ router.get('/', async (req, res) => {
         res.attachment('datos.csv');
         res.send(csv);
     } catch (error) {
-        console.error(error);
+        console.error('Error en el endpoint',error);
         res.status(500).send('Error datos');
     }    
 });
