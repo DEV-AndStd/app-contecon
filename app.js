@@ -19,6 +19,7 @@ app.get('/', (req, res) => {
 
 // Ruta para servir el HTML
 app.get('/exportar', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
   res.sendFile(path.join(__dirname, 'export.html'));
 });
 
@@ -30,7 +31,7 @@ app.use('/turnos', turnosRoutes);
 app.use('/registro_turnos',registrosRoutes);
 app.use('/turnos_emergencia', emergenciaRoutes);
 app.use('/EstadoHistorial', EstadoHistorialRoutes);
-app.use('/exportar',exportarRoutes);
+app.use('/routes/exportar',exportarRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
