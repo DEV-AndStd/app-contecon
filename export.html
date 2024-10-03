@@ -11,7 +11,7 @@
 
     <script>
         document.getElementById('export-button').addEventListener('click', () => {
-            fetch('/exportar') 
+            fetch('/exportar/usuarios') 
                 .then(response => {
                     if (response.ok) {
                         return response.blob();

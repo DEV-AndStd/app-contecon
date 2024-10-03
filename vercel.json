@@ -48,6 +48,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/exportar/usuarios",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }
