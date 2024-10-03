@@ -31,7 +31,7 @@ app.use('/turnos', turnosRoutes);
 app.use('/registro_turnos',registrosRoutes);
 app.use('/turnos_emergencia', emergenciaRoutes);
 app.use('/EstadoHistorial', EstadoHistorialRoutes);
-app.use('/routes/exportar',exportarRoutes);
+app.use('/exportar',exportarRoutes);
 
 app.listen(3000, () => {
   console.log('Servidor escuchando en el puerto 3000');
