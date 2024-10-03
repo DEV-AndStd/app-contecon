@@ -2,13 +2,13 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../db');
 
-router.get('/', async (req, res) => {
+router.get('/exportar', async (req, res) => {
     try {
         const result = await pool.query('SELECT * from usuarios'); 
         const data = result.rows;
 
         // Obtener los encabezados
-    const headers = Object.keys(data[0]).join('/t'); // Sin comillas alrededor de los encabezados
+    const headers = Object.keys(data[0]).join(','); // Sin comillas alrededor de los encabezados
 
     // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
     const csvRows = data.map(row => {
@@ -16,9 +16,9 @@ router.get('/', async (req, res) => {
             .map(value => {
                 // Envolver el valor en comillas si contiene comas o comillas dobles
                 const escapedValue = value.toString().replace(/"/g, '""');
-                return escapedValue.includes('/t') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
+                return escapedValue.includes(',') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
             })
-            .join('/t'); // Usar coma como separador
+            .join(','); // Usar coma como separador
     });
 
     // Combinar encabezados y datos
