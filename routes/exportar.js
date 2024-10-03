@@ -8,17 +8,18 @@ router.get('/', async (req, res) => {
         const data = result.rows;
 
         // Obtener los encabezados
-        const headers = Object.keys(data[0]).map(header => `"${header}"`).join(','); // Comillas alrededor de los encabezados
+        const headers = Object.keys(data[0]).map(header => header).join(','); // Sin comillas alrededor de los encabezados
 
         // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
         const csvRows = data.map(row => {
             return Object.values(row)
-                .map(value => `"${value.toString().replace(/"/g, '""')}"`) // Escapar comillas
+                .map(value => value.toString().replace(/"/g, '""')) // Escapar comillas
                 .join(','); // Usar coma como separador
         });
 
         // Combinar encabezados y datos
         const csv = [headers, ...csvRows].join('\n');
+        
         // Establecer cabeceras para la descarga
         res.header('Content-Type', 'text/csv');
         res.attachment('datos.csv');
