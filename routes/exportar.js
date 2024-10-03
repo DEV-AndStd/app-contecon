@@ -4,7 +4,7 @@ const pool = require('../db');
 
 router.get('/', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * FROM tu_tabla'); 
+        const result = await pool.query('SELECT * from usuarios'); 
         const data = result.rows;
 
         // Convierte los datos a CSV
