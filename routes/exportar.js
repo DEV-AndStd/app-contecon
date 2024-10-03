@@ -7,8 +7,19 @@ router.get('/', async (req, res) => {
         const result = await pool.query('SELECT * from usuarios'); 
         const data = result.rows;
 
-        // Convierte los datos a CSV
-        const csv = data.map(row => Object.values(row).join(',')).join('\n');
+        // Obtener los encabezados
+        const headers = Object.keys(data[0]).join(','); 
+
+        // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
+        const csv = [
+            headers, 
+            ...data.map(row => 
+                Object.values(row).map(value => {
+                    // Manejar comas y saltos de línea en los valores
+                    return `"${value.toString().replace(/"/g, '""')}"`; 
+                }).join(',')
+            )
+        ].join('\n');
 
         // Establecer cabeceras para la descarga
         res.header('Content-Type', 'text/csv');
