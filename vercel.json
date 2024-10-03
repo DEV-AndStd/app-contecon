@@ -52,6 +52,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/exportar/equipos",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }
