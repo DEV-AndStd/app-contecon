@@ -4,7 +4,7 @@ const pool = require('../db');
 
 router.get('/', async (req, res) => {
     try {
-        const result = await pool.query('SELECT * from usuarios'); 
+        const result = await pool.query('SELECT nombre, codigo, rol FROM usuarios'); 
         const data = result.rows;
     
         // Obtener los encabezados

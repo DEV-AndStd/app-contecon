@@ -6,12 +6,12 @@
     <title>Exportar Datos</title>
 </head>
 <body>
-    <h1>Exportar Datos de la Base de Datos</h1>
+    <h1>Exportar Datos de Usuarios de la BD</h1>
     <button id="export-button">Descargar Datos</button>
 
     <script>
         document.getElementById('export-button').addEventListener('click', () => {
-            fetch('/routes/exportar') 
+            fetch('./routes/exportar') 
                 .then(response => {
                     if (response.ok) {
                         return response.blob();
