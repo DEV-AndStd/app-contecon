@@ -8,7 +8,7 @@ router.get('/usuarios', async (req, res) => {
         const data = result.rows;
     
         // Obtener los encabezados
-        const headers = Object.keys(data[0]).join(','); // Encabezados separados por comas
+        const headers = Object.keys(data[0]).join(';'); // Encabezados separados por comas
     
         // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
         const csvRows = data.map(row => {
@@ -17,9 +17,9 @@ router.get('/usuarios', async (req, res) => {
                     // Escapar comillas dobles
                     const escapedValue = value.toString().replace(/"/g, '""');
                     // Envolver el valor en comillas si contiene comas o comillas dobles
-                    return escapedValue.includes(',') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
+                    return escapedValue.includes(';') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
                 })
-                .join(','); // Usar coma como separador
+                .join(';'); // Usar coma como separador
         });
     
         // Combinar encabezados y datos
@@ -46,7 +46,7 @@ router.get('/equipos', async (req, res) => {
         }
 
         // Obtener los encabezados
-        const headers = Object.keys(data[0]).join(','); // Encabezados separados por comas
+        const headers = Object.keys(data[0]).join(';'); // Encabezados separados por comas
 
         // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
         const csvRows = data.map(row => {
@@ -55,11 +55,11 @@ router.get('/equipos', async (req, res) => {
                     // Verificar si el valor es null y reemplazarlo con una cadena vacía
                     const safeValue = value === null ? '' : value;
                     // Escapar comillas dobles
-                    const escapedValue = safeValue.toString().replace(/"/g, ';');
+                    const escapedValue = safeValue.toString().replace(/"/g, '""');
                     // Envolver el valor en comillas si contiene comas o comillas dobles
-                    return escapedValue.includes(',') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
+                    return escapedValue.includes(';') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
                 })
-                .join(','); // Usar coma como separador
+                .join(';'); // Usar coma como separador
         });
 
         // Combinar encabezados y datos
