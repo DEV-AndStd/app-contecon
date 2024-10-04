@@ -11,9 +11,37 @@
     <button id="export-button">Descargar Datos</button>
 
     <h3>Exportar datos de Registro de Equipos</h3>
+    <label for="fecha-inicio">Fecha de inicio:</label>
+    <input type="date" id="fecha-inicio">
+    <label for="fecha-fin">Fecha de fin:</label>
+    <input type="date" id="fecha-fin">
     <button id="equipos-button">Descargar datos</button>
 
+    <h3>Exportar Turnos Registrados</h3>
+    <button id="turnos-button">Descargar Registros</button>
+
     <script>
+        const inicioInput = document.getElementById('fecha-inicio');
+        const finInput = document.getElementById('fecha-fin');
+        const botonEquipos = document.getElementById('equipos-button');
+
+        function validarFechas() 
+        {
+            const fechaInicio = new Date(inicioInput.value);
+            const fechaFin = new Date(finInput.value);
+            
+            // Habilitar el botón solo si ambas fechas son válidas
+            if (inicioInput.value && finInput.value && fechaInicio <= fechaFin) {
+                botonEquipos.disabled = false;
+            } else {
+                botonEquipos.disabled = true;
+            }
+        }
+
+        // Añadir event listeners para validar las fechas cuando cambien
+        inicioInput.addEventListener('change', validarFechas);
+        finInput.addEventListener('change', validarFechas);
+
         document.getElementById('export-button').addEventListener('click', () => {
             fetch('/exportar/usuarios') 
                 .then(response => {
@@ -51,6 +79,29 @@
                     a.style.display = 'none';
                     a.href = url;
                     a.download = 'registro-equipos.csv';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                })
+                .catch(error => {
+                    console.error('Error en el html:', error);
+                });
+        });
+
+        document.getElementById('turnos-button').addEventListener('click', () => {
+            fetch('/exportar/turnos') 
+                .then(response => {
+                    if (response.ok) {
+                        return response.blob();
+                    }
+                    throw new Error('Error en la descarga');
+                })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = 'registro-turnos.csv';
                     document.body.appendChild(a);
                     a.click();
                     window.URL.revokeObjectURL(url);

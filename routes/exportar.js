@@ -75,5 +75,45 @@ router.get('/equipos', async (req, res) => {
     }    
 });
 
+router.get('/turnos', async (req, res) => {
+    try {
+        const result = await pool.query('select codigo, nombre, motivo, detalle, dia, hora, n_cierre, fecha_registro, observaciones, tiempo_cierre from registro_turnos'); 
+        const data = result.rows;
+
+        if (data.length === 0) {
+            res.send('No hay datos para exportar');
+            return;
+        }
+
+        // Obtener los encabezados
+        const headers = Object.keys(data[0]).join(';'); // Encabezados separados por comas
+
+        // Convierte los datos a CSV, añadiendo comillas para manejar comas en los datos
+        const csvRows = data.map(row => {
+            return Object.values(row)
+                .map(value => {
+                    // Verificar si el valor es null y reemplazarlo con una cadena vacía
+                    const safeValue = value === null ? '' : value;
+                    // Escapar comillas dobles
+                    const escapedValue = safeValue.toString().replace(/"/g, '""');
+                    // Envolver el valor en comillas si contiene comas o comillas dobles
+                    return escapedValue.includes(';') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
+                })
+                .join(';'); // Usar coma como separador
+        });
+
+        // Combinar encabezados y datos
+        const csv = [headers, ...csvRows].join('\n');
+        
+        // Establecer cabeceras para la descarga
+        res.header('Content-Type', 'text/csv');
+        res.attachment('registro-turnos.csv');
+        res.send(csv);
+    } catch (error) {
+        console.error('Error en el endpoint', error);
+        res.status(500).send('Error datos');
+    }    
+});
+
 
 module.exports = router;

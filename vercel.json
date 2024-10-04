@@ -56,6 +56,10 @@
       "dest": "app.js"
     },
     {
+      "src": "/exportar/turnos",
+      "dest": "app.js"
+    },
+    {
       "src": "/",
       "dest": "app.js"
     }
