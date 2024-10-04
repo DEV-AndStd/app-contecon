@@ -55,7 +55,7 @@ router.get('/equipos', async (req, res) => {
                     // Verificar si el valor es null y reemplazarlo con una cadena vacía
                     const safeValue = value === null ? '' : value;
                     // Escapar comillas dobles
-                    const escapedValue = safeValue.toString().replace(/"/g, '""');
+                    const escapedValue = safeValue.toString().replace(/"/g, ';');
                     // Envolver el valor en comillas si contiene comas o comillas dobles
                     return escapedValue.includes(',') || escapedValue.includes('"') ? `"${escapedValue}"` : escapedValue;
                 })
